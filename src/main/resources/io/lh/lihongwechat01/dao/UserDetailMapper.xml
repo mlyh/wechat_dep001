@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.lh.lihongwechat01.dao.UserDetailMapper">
+  <resultMap id="BaseResultMap" type="io.lh.lihongwechat01.po.UserDetail">
+    <id column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="gender" jdbcType="TINYINT" property="gender" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="checkRecord" jdbcType="VARCHAR" property="checkrecord" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    openid, gender, mobile, checkRecord
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_detail
+    where openid = #{openid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user_detail
+    where openid = #{openid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="io.lh.lihongwechat01.po.UserDetail">
+    insert into user_detail (openid, gender, mobile, 
+      checkRecord)
+    values (#{openid,jdbcType=VARCHAR}, #{gender,jdbcType=TINYINT}, #{mobile,jdbcType=VARCHAR}, 
+      #{checkrecord,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="io.lh.lihongwechat01.po.UserDetail">
+    insert into user_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="openid != null">
+        openid,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="checkrecord != null">
+        checkRecord,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=TINYINT},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="checkrecord != null">
+        #{checkrecord,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="io.lh.lihongwechat01.po.UserDetail">
+    update user_detail
+    <set>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=TINYINT},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="checkrecord != null">
+        checkRecord = #{checkrecord,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where openid = #{openid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="io.lh.lihongwechat01.po.UserDetail">
+    update user_detail
+    set gender = #{gender,jdbcType=TINYINT},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      checkRecord = #{checkrecord,jdbcType=VARCHAR}
+    where openid = #{openid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.lh.lihongwechat01.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="io.lh.lihongwechat01.po.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="department_id" jdbcType="INTEGER" property="departmentId" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="openId_status" jdbcType="TINYINT" property="openidStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, openid, avatar_url, real_name, department_id, status, openId_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="io.lh.lihongwechat01.po.User">
+    insert into user (id, openid, avatar_url, 
+      real_name, department_id, status, 
+      openId_status)
+    values (#{id,jdbcType=INTEGER}, #{openid,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR}, 
+      #{realName,jdbcType=VARCHAR}, #{departmentId,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, 
+      #{openidStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="io.lh.lihongwechat01.po.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="openid != null">
+        openid,
+      </if>
+      <if test="avatarUrl != null">
+        avatar_url,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="departmentId != null">
+        department_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="openidStatus != null">
+        openId_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="avatarUrl != null">
+        #{avatarUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="openidStatus != null">
+        #{openidStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="io.lh.lihongwechat01.po.User">
+    update user
+    <set>
+      <if test="openid != null">
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="avatarUrl != null">
+        avatar_url = #{avatarUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null">
+        department_id = #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="openidStatus != null">
+        openId_status = #{openidStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="io.lh.lihongwechat01.po.User">
+    update user
+    set openid = #{openid,jdbcType=VARCHAR},
+      avatar_url = #{avatarUrl,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      department_id = #{departmentId,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      openId_status = #{openidStatus,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
